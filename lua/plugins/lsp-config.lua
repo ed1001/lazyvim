@@ -1,6 +1,16 @@
 return {
   "neovim/nvim-lspconfig",
-  dependencies = { "jose-elias-alvarez/typescript.nvim" },
+  dependencies = {
+    "jose-elias-alvarez/typescript.nvim",
+    {
+      "SmiteshP/nvim-navbuddy",
+      dependencies = {
+        "SmiteshP/nvim-navic",
+        "MunifTanjim/nui.nvim",
+      },
+      opts = { lsp = { auto_attach = true } },
+    },
+  },
   opts = {
     -- make sure mason installs the server
     servers = {
@@ -27,10 +37,27 @@ return {
         },
       },
       eslint = {},
+      terraformls = {},
+      emmet_language_server = {},
+      jsonls = {
+        -- lazy-load schemastore when needed
+        on_new_config = function(new_config)
+          new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+          vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+        end,
+        settings = {
+          json = {
+            format = {
+              enable = true,
+            },
+            validate = { enable = true },
+          },
+        },
+      },
     },
     setup = {
       tsserver = function(_, opts)
-        require("lazyvim.util").on_attach(function(client, buffer)
+        require("lazyvim.util").lsp.on_attach(function(client, buffer)
           if client.name == "tsserver" then
             -- stylua: ignore
             vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
@@ -46,7 +73,7 @@ return {
         return true
       end,
       eslint = function()
-        require("lazyvim.util").on_attach(function(client)
+        require("lazyvim.util").lsp.on_attach(function(client)
           if client.name == "eslint" then
             client.server_capabilities.documentFormattingProvider = true
           elseif client.name == "tsserver" then

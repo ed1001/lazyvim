@@ -14,19 +14,42 @@ vim.keymap.set("i", "<C-l>", "<Right>", { silent = true, desc = "Move right" })
 vim.keymap.set("i", "<C-j>", "<Down>", { silent = true, desc = "Move down" })
 vim.keymap.set("i", "<C-k>", "<Up>", { silent = true, desc = "Move up" })
 
--- center screen when page up/down
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
-vim.keymap.set("i", "jk", "<ESC>", { silent = true })
+-- delete without yank
+vim.keymap.set(
+  "n",
+  "x",
+  'x:let @+=@0<CR>:let @"=@0<CR>',
+  { noremap = true, silent = true, desc = "Delete char without yank" }
+)
 
--- don't copy replaced text
-vim.keymap.set("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { noremap = true, silent = true })
+-- harpoon
+vim.keymap.set("n", "<leader>h", function()
+  require("harpoon.ui").toggle_quick_menu()
+end, { silent = true, desc = "Open Harpoon" })
 
--- overwrite lazyvim mappings with vim-tmux-navigator mappings
--- see: https://github.com/christoomey/vim-tmux-navigator/blob/master/plugin/tmux_navigator.vim
-vim.cmd([[
-  noremap <silent> <c-h> :<C-U>TmuxNavigateLeft<cr>
-  noremap <silent> <c-j> :<C-U>TmuxNavigateDown<cr>
-  noremap <silent> <c-k> :<C-U>TmuxNavigateUp<cr>
-  noremap <silent> <c-l> :<C-U>TmuxNavigateRight<cr>
-  noremap <silent> <c-\> :<C-U>TmuxNavigatePrevious<cr>
-]])
+vim.keymap.set("n", "<leader>hh", function()
+  require("harpoon.mark").add_file()
+end, { silent = true, desc = "Add file to Harpoon" })
+
+vim.keymap.set("n", "<leader>hf", function()
+  require("harpoon.ui").nav_next()
+end, { silent = true, desc = "Nav next Harpoon" })
+
+-- nav buddy
+vim.keymap.set("n", "<leader>n", function()
+  require("nvim-navbuddy").open()
+end, { silent = true, desc = "Open Nav Buddy" })
+
+-- dap
+vim.keymap.set("n", "<leader>df", function()
+  require("dapui").float_element("scopes")
+end, { silent = true, desc = "Open scopes" })
+
+vim.keymap.set("n", "<leader>dx", function()
+  require("dap").clear_breakpoints()
+end, { silent = true, desc = "Clear Breakpoints" })
+
+-- git
+vim.keymap.set("n", "<leader>gb", function()
+  vim.cmd("Git blame")
+end, { silent = true, desc = "Git blame" })
