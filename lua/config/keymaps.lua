@@ -14,7 +14,7 @@ vim.keymap.set("i", "<C-l>", "<Right>", { silent = true, desc = "Move right" })
 vim.keymap.set("i", "<C-j>", "<Down>", { silent = true, desc = "Move down" })
 vim.keymap.set("i", "<C-k>", "<Up>", { silent = true, desc = "Move up" })
 
--- delete without yank
+-- delete withut yank
 vim.keymap.set(
   "n",
   "x",
