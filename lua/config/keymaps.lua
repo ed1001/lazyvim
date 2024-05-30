@@ -22,19 +22,6 @@ vim.keymap.set(
   { noremap = true, silent = true, desc = "Delete char without yank" }
 )
 
--- harpoon
-vim.keymap.set("n", "<leader>h", function()
-  require("harpoon.ui").toggle_quick_menu()
-end, { silent = true, desc = "Open Harpoon" })
-
-vim.keymap.set("n", "<leader>hh", function()
-  require("harpoon.mark").add_file()
-end, { silent = true, desc = "Add file to Harpoon" })
-
-vim.keymap.set("n", "<leader>hf", function()
-  require("harpoon.ui").nav_next()
-end, { silent = true, desc = "Nav next Harpoon" })
-
 -- nav buddy
 vim.keymap.set("n", "<leader>n", function()
   require("nvim-navbuddy").open()
