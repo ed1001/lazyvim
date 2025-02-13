@@ -22,3 +22,27 @@ vim.keymap.set(
   'x:let @+=@0<CR>:let @"=@0<CR>',
   { noremap = true, silent = true, desc = "Delete char without yank" }
 )
+
+vim.keymap.set("n", "<leader>t", function()
+  local file_path = vim.fn.expand("~/code/ed1001/dotfiles/vimtips.txt")
+  local buf_exists = false
+  local target_win = nil
+
+  -- Check if the file is already open in a window
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.api.nvim_buf_get_name(buf) == file_path then
+      buf_exists = true
+      target_win = win
+      break
+    end
+  end
+
+  if buf_exists and target_win then
+    -- If the file is already open, close the window
+    vim.api.nvim_win_close(target_win, true)
+  else
+    -- Otherwise, open it in a vertical split
+    vim.cmd("vsplit " .. file_path)
+  end
+end, { desc = "Toggle vim tips in a vertical split" })
