@@ -23,26 +23,50 @@ vim.keymap.set(
   { noremap = true, silent = true, desc = "Delete char without yank" }
 )
 
-vim.keymap.set("n", "<leader>t", function()
-  local file_path = vim.fn.expand("~/code/ed1001/dotfiles/vimtips.txt")
-  local buf_exists = false
-  local target_win = nil
+local function toggle_file_in_vsplit(file_path, keybinding, description)
+  vim.keymap.set("n", keybinding, function()
+    local expanded_path = vim.fn.expand(file_path)
+    local buf_exists = false
+    local target_win = nil
+    local target_buf = nil
 
-  -- Check if the file is already open in a window
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    if vim.api.nvim_buf_get_name(buf) == file_path then
-      buf_exists = true
-      target_win = win
-      break
+    -- Check if the file is already open in a window
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      if vim.api.nvim_buf_get_name(buf) == expanded_path then
+        buf_exists = true
+        target_win = win
+        target_buf = buf
+        break
+      end
     end
-  end
 
-  if buf_exists and target_win then
-    -- If the file is already open, close the window
-    vim.api.nvim_win_close(target_win, true)
-  else
-    -- Otherwise, open it in a vertical split
-    vim.cmd("vsplit " .. file_path)
-  end
-end, { desc = "Toggle vim tips in a vertical split" })
+    if buf_exists and target_win and target_buf then
+      -- Close the window
+      vim.api.nvim_win_close(target_win, true)
+      -- Check if the buffer is still open elsewhere before deleting
+      local buf_still_open = false
+      for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_buf(win) == target_buf then
+          buf_still_open = true
+          break
+        end
+      end
+      -- Delete buffer if it's not open elsewhere
+      if not buf_still_open then
+        vim.api.nvim_buf_delete(target_buf, { force = true })
+      end
+    else
+      -- Open the file in a vertical split
+      vim.cmd("vsplit " .. expanded_path)
+    end
+  end, { desc = description or ("Toggle " .. file_path) })
+end
+
+toggle_file_in_vsplit("~/code/ed1001/dotfiles/vimtips.txt", "<leader>tv", "Toggle Vim tips")
+toggle_file_in_vsplit("~/code/ed1001/empowr/packages/db/prisma/schema.prisma", "<leader>ts", "Toggle Prisma schema")
+toggle_file_in_vsplit("~/code/ed1001/empowr/.env", "<leader>te", "Toggle .env")
+toggle_file_in_vsplit("~/code/ed1001/empowr/.env", "<leader>ted", "Toggle .env")
+toggle_file_in_vsplit("~/code/ed1001/empowr/.env.prod", "<leader>tep", "Toggle .env.prod")
+toggle_file_in_vsplit("~/code/ed1001/empowr/.env.test", "<leader>tet", "Toggle .env.test")
+toggle_file_in_vsplit("~/code/ed1001/notes.txt", "<leader>tn", "Toggle notes")
