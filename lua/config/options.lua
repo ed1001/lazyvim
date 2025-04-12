@@ -4,3 +4,4 @@
 
 vim.g.ai_cmp = false
 vim.g.lazyvim_picker = "telescope"
+vim.opt.swapfile = false

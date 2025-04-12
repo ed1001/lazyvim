@@ -28,8 +28,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.editor.harpoon2" },
     { import = "lazyvim.plugins.extras.editor.illuminate" },
     { import = "lazyvim.plugins.extras.editor.telescope" },
-    -- { import = "lazyvim.plugins.extras.editor.refactoring" },
-    -- { import = "lazyvim.plugins.extras.editor.outline" },
+    { import = "lazyvim.plugins.extras.editor.refactoring" },
+    { import = "lazyvim.plugins.extras.editor.aerial" },
     -- { import = "lazyvim.plugins.extras.editor.mini-diff" },
 
     { import = "lazyvim.plugins.extras.formatting.prettier" },
