@@ -9,11 +9,24 @@ vim.keymap.set("i", "jk", "<ESC>", { silent = true })
 vim.keymap.set("n", "<leader><leader>", "<cmd>w<cr>", { silent = true, desc = "Save file" })
 vim.keymap.set("n", "<leader>a", "<cmd>wa<cr>", { silent = true, desc = "Save all files" })
 
+vim.keymap.set("n", "<leader>ac", "<cmd>CodeCompanionChat<cr>", { silent = true, desc = "CodeCompanionChat" })
+
 -- moving in insert mode
 vim.keymap.set("i", "<C-h>", "<Left>", { silent = true, desc = "Move left" })
 vim.keymap.set("i", "<C-l>", "<Right>", { silent = true, desc = "Move right" })
 vim.keymap.set("i", "<C-j>", "<Down>", { silent = true, desc = "Move down" })
 vim.keymap.set("i", "<C-k>", "<Up>", { silent = true, desc = "Move up" })
+
+vim.keymap.set("n", "<leader>oi", "<cmd>TSToolsOrganizeImports<CR>", { silent = true, desc = "Organize imports" })
+vim.keymap.set("n", "<leader>cM", "<cmd>TSToolsAddMissingImports<CR>", { silent = true, desc = "Add missing imports" })
+vim.keymap.set("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { silent = true, desc = "Remove unused" })
+vim.keymap.set(
+  "n",
+  "<leader>fa",
+  "<cmd>TSToolsFixAll<CR>|<cmd>EslintFixAll<CR>",
+  { silent = true, desc = "Fix all ts and eslint" }
+)
+vim.keymap.set("n", "gd", "<cmd>TSToolsGoToSourceDefinition<CR>", { silent = true, desc = "Go to source definition" })
 
 -- delete without yank
 vim.keymap.set(
@@ -65,7 +78,6 @@ end
 
 toggle_file_in_vsplit("~/code/ed1001/dotfiles/vimtips.txt", "<leader>tv", "Toggle Vim tips")
 toggle_file_in_vsplit("~/code/ed1001/empowr/packages/db/prisma/schema.prisma", "<leader>ts", "Toggle Prisma schema")
-toggle_file_in_vsplit("~/code/ed1001/empowr/.env", "<leader>te", "Toggle .env")
 toggle_file_in_vsplit("~/code/ed1001/empowr/.env", "<leader>ted", "Toggle .env")
 toggle_file_in_vsplit("~/code/ed1001/empowr/.env.prod", "<leader>tep", "Toggle .env.prod")
 toggle_file_in_vsplit("~/code/ed1001/empowr/.env.test", "<leader>tet", "Toggle .env.test")
