@@ -17,16 +17,17 @@ vim.keymap.set("i", "<C-l>", "<Right>", { silent = true, desc = "Move right" })
 vim.keymap.set("i", "<C-j>", "<Down>", { silent = true, desc = "Move down" })
 vim.keymap.set("i", "<C-k>", "<Up>", { silent = true, desc = "Move up" })
 
-vim.keymap.set("n", "<leader>oi", "<cmd>TSToolsOrganizeImports<CR>", { silent = true, desc = "Organize imports" })
-vim.keymap.set("n", "<leader>cM", "<cmd>TSToolsAddMissingImports<CR>", { silent = true, desc = "Add missing imports" })
-vim.keymap.set("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { silent = true, desc = "Remove unused" })
-vim.keymap.set(
-  "n",
-  "<leader>fa",
-  "<cmd>TSToolsFixAll<CR>|<cmd>EslintFixAll<CR>",
-  { silent = true, desc = "Fix all ts and eslint" }
-)
-vim.keymap.set("n", "gd", "<cmd>TSToolsGoToSourceDefinition<CR>", { silent = true, desc = "Go to source definition" })
+-- TSTools
+-- vim.keymap.set("n", "<leader>oi", "<cmd>TSToolsOrganizeImports<CR>", { silent = true, desc = "Organize imports" })
+-- vim.keymap.set("n", "<leader>cM", "<cmd>TSToolsAddMissingImports<CR>", { silent = true, desc = "Add missing imports" })
+-- vim.keymap.set("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { silent = true, desc = "Remove unused" })
+-- vim.keymap.set(
+--   "n",
+--   "<leader>fa",
+--   "<cmd>TSToolsFixAll<CR>|<cmd>EslintFixAll<CR>",
+--   { silent = true, desc = "Fix all ts and eslint" }
+-- )
+-- vim.keymap.set("n", "gd", "<cmd>TSToolsGoToSourceDefinition<CR>", { silent = true, desc = "Go to source definition" })
 
 -- delete without yank
 vim.keymap.set(
