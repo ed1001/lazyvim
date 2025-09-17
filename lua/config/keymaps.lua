@@ -78,8 +78,3 @@ local function toggle_file_in_vsplit(file_path, keybinding, description)
 end
 
 toggle_file_in_vsplit("~/code/ed1001/dotfiles/vimtips.txt", "<leader>tv", "Toggle Vim tips")
-toggle_file_in_vsplit("~/code/ed1001/empowr/packages/db/prisma/schema.prisma", "<leader>ts", "Toggle Prisma schema")
-toggle_file_in_vsplit("~/code/ed1001/empowr/.env", "<leader>ted", "Toggle .env")
-toggle_file_in_vsplit("~/code/ed1001/empowr/.env.prod", "<leader>tep", "Toggle .env.prod")
-toggle_file_in_vsplit("~/code/ed1001/empowr/.env.test", "<leader>tet", "Toggle .env.test")
-toggle_file_in_vsplit("~/code/ed1001/notes.txt", "<leader>tn", "Toggle notes")

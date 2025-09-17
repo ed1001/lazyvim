@@ -51,6 +51,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.ui.smear-cursor" },
     { import = "lazyvim.plugins.extras.ui.treesitter-context" },
 
+    { import = "lazyvim.plugins.extras.test.core" },
+
     -- import/override with your plugins
     { import = "plugins" },
   },
